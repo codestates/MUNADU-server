@@ -48,13 +48,15 @@ export const allReplyList = async (req: Request, res: Response) => {
 
 // ? 특정 사용자가 작성한 모든 댓글리스트 읽기.
 export const userList = async (req: Request, res: Response) => {
-  if (!isAuthorized(req)) {
-    res.status(403).json({ message: "Invalid Access Token" });
-    return;
-  }
   try {
     const data = await Reviews_Replies.findAll({
       where: { Users_id: req.params.userid },
+      include: {
+        model: Users,
+        attributes: ["name"],
+        where: { id: sequelize.col("Users_id") },
+      },
+      order: [["createdAt", "DESC"]],
     });
     res.status(200).json({ data: data, message: "ok" });
   } catch (err) {

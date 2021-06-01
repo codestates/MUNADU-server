@@ -25,6 +25,12 @@ export const userList = async (req: Request, res: Response) => {
   try {
     const commentsUserData = await Comments.findAll({
       where: { Users_id: req.params.userid },
+      include: {
+        model: Users,
+        attributes: ["name", "img"],
+        where: { id: sequelize.col("Users_id") },
+      },
+      order: [["createdAt", "DESC"]],
     });
     res.status(200).json({ data: commentsUserData, message: "ok" });
   } catch (e) {
