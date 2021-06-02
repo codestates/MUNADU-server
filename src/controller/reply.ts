@@ -11,7 +11,7 @@ export const reviewList = async (req: Request, res: Response) => {
       where: { Reviews_id: req.params.reviewid },
       include: {
         model: Users,
-        attributes: ["name"],
+        attributes: ["name", "img"],
         where: { id: sequelize.col("Users_id") },
       },
       order: [["createdAt", "DESC"]],
@@ -53,7 +53,7 @@ export const userList = async (req: Request, res: Response) => {
       where: { Users_id: req.params.userid },
       include: {
         model: Users,
-        attributes: ["name"],
+        attributes: ["name", "img"],
         where: { id: sequelize.col("Users_id") },
       },
       order: [["createdAt", "DESC"]],
@@ -81,7 +81,7 @@ export const create = async (req: Request, res: Response) => {
       Reviews_id: reviewId,
     });
     const user = await Users.findOne({
-      attributes: ["name"],
+      attributes: ["name", "img"],
       where: { id: resp.Users_id },
     });
     console.log(`resp`, resp);
