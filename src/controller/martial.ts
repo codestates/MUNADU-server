@@ -16,19 +16,19 @@ export const info = async (req: Request, res: Response) => {
     res.status(404).json({ message: "Not Found" });
   }
 };
+
 export const coordinate = async (req: Request, res: Response) => {
   try {
     const { query } = req.body;
-    const geocodingUrl =
-      "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode";
+
+    const geocodingUrl = "https://dapi.kakao.com/v2/local/search/address.json";
     const coord = await axios
       .get(`${geocodingUrl}`, {
         params: {
           query,
         },
         headers: {
-          "X-NCP-APIGW-API-KEY-ID": `${process.env.REACT_APP_NCP_CLIENT_ID}`,
-          "X-NCP-APIGW-API-KEY": `${process.env.REACT_APP_NCP_CLIENT_SECRET}`,
+          Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_CLIENT_RESTAPI}`,
         },
       })
       .then((res) => {
@@ -37,13 +37,17 @@ export const coordinate = async (req: Request, res: Response) => {
         return res.data;
       })
       .then((data) => {
-        if (data.addresses.length > 1) {
+        console.log(`data.documents: `, data.documents);
+        if (data.documents.length > 1) {
           console.log(`${query}에는 여러 주소가 있어요.`);
-        } else if (data.addresses.length === 0) {
+        } else if (data.documents.length === 0) {
           console.log(`${query}에 해당되는 좌표가 없어요.`);
           return { lat: 37.4965695, lgt: 127.0247765 };
         }
-        return { lat: data.addresses[0].y, lgt: data.addresses[0].x };
+        return {
+          lat: data.documents[0].address.y,
+          lgt: data.documents[0].address.x,
+        };
       });
 
     res.status(200).json({ data: coord, message: "ok" });
