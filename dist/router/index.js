@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const user_1 = __importDefault(require("./user"));
+const martial_1 = __importDefault(require("./martial"));
+const review_1 = __importDefault(require("./review"));
+const comment_1 = __importDefault(require("./comment"));
+const reply_1 = __importDefault(require("./reply"));
+const channel_1 = __importDefault(require("./channel"));
+const router = express_1.Router();
+router.use("/user", user_1.default);
+router.use("/martial", martial_1.default);
+router.use("/review", review_1.default);
+router.use("/comment", comment_1.default);
+router.use("/reply", reply_1.default);
+router.use("/channel", channel_1.default);
+exports.default = router;

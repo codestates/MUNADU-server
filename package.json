@@ -1,0 +1,52 @@
+{
+  "name": "MUNADU-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "dev": "nodemon src/app.ts",
+    "build": "tsc -p .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "ts-node src/seedData.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daeseongkim05/MUNADU-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daeseongkim05/MUNADU-server/issues"
+  },
+  "homepage": "https://github.com/daeseongkim05/MUNADU-server#readme",
+  "dependencies": {
+    "@types/express": "^4.17.11",
+    "@types/multer": "^1.4.5",
+    "@types/node": "^15.0.3",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "google-auth-library": "^7.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.2",
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.7",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.6.2",
+    "sequelize-cli": "^6.2.0",
+    "sequelize-typescript": "^2.1.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.2",
+    "@types/cors": "^2.8.10",
+    "@types/dotenv": "^8.2.0",
+    "@types/jsonwebtoken": "^8.5.1",
+    "@types/validator": "^13.1.3"
+  }
+}
